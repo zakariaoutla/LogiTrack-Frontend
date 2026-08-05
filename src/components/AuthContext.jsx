@@ -1,45 +1,53 @@
-import {createContext, useEffect, useState} from "react";
-import axiosInstance from "../api/axiosInstance.js";
-import {useNavigate} from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-export const  AuthContext = createContext()
+export const AuthContext = createContext();
 
-export const AuthProvider = ({children})=>{
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const navigat = useNavigate()
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const navigat = useNavigate();
 
-    useEffect(()=>{
-        const token = localStorage.getItem('token')
-        if (token){
-            axiosInstance.get('/auth/me')
-                .then((res)=>{
-                    setUser(res.data)
-                    console.log("ha data", res.data)
-                })
-                .catch((error)=>{
-                    console.error('token invalid ou expire')
-                    localStorage.removeItem('token')
-                    setUser(null)
-                })
-                .finally(()=>{
-                    setLoading(false)
-                })
-        }else {
-            setLoading(false)
+    const updateUserFromToken = (token) => {
+        try {
+            const decodedToken = jwtDecode(token);
+            let nom = decodedToken.nom || "";
+            let prenom = decodedToken.prenom || "";
+            let role = decodedToken.role || "";
+            setUser({
+                nom: nom,
+                prenom: prenom,
+                role: role
+            });
+        } catch (err) {
+            localStorage.removeItem('token');
+            setUser(null);
         }
-    },[])
+    };
 
-    const logout =()=>{
-        localStorage.removeItem('token')
-        setUser(null)
-        navigat('/login')
-    }
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            updateUserFromToken(token);
+        }
+        setLoading(false);
+    }, []);
 
-    return(
-        <AuthContext.Provider value={{ user, setUser, logout, loading }}>
+    const login = (token) => {
+        localStorage.setItem('token', token);
+        updateUserFromToken(token);
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        setUser(null);
+        navigat('/login');
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, setUser, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
-    )
-
-}
+    );
+};

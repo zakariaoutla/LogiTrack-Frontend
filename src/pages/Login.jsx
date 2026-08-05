@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,21 +9,24 @@ import logo from '../assets/Logitracklogin.png'
 import {postUserLogin} from "../api/userService.js";
 import { toast } from 'react-toastify';
 import {useNavigate} from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import {AuthContext} from "../components/AuthContext.jsx";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
+    const {login} = useContext(AuthContext)
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const res = await postUserLogin(email,password)
             const token = res.data.token;
-            localStorage.setItem("token", token)
-            const decodedToken = jwtDecode(token)
+            login(token)
             toast.success("Vous êtes connecté avec succès !")
-            navigate("/dashboard")
+            setTimeout(()=>{
+                navigate("/dashboard")
+            },1000)
+
         }catch (err){
             toast.error("Erreur lors de la connexion. Veuillez réessayer.")
             console.error("Registration failed:",err)

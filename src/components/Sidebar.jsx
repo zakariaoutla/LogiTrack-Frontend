@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
-import { NavLink, useNavigate } from 'react-router-dom'; 
+import { NavLink, useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
@@ -13,6 +13,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import GroupIcon from '@mui/icons-material/Group';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../assets/LogitrackLogo.png';
+import {AuthContext} from "./AuthContext.jsx";
 
 const drawerWidth = 240;
 
@@ -25,12 +26,7 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
-    const navigate = useNavigate();
-
-   const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login');
-    };
+    const {logout} = useContext(AuthContext)
 
     return (
         <Drawer
@@ -94,7 +90,7 @@ const Sidebar = () => {
             <Box sx={{ mt: 'auto', mb: 2, px: 1 }}>
 
                 <ListItemButton
-                    onClick={handleLogout}
+                    onClick={logout}
                     sx={{
                         borderRadius: 2,
                         color: '#ff6b6b',
