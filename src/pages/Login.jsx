@@ -9,6 +9,7 @@ import logo from '../assets/Logitracklogin.png'
 import {postUserLogin} from "../api/userService.js";
 import { toast } from 'react-toastify';
 import {useNavigate} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,6 +19,9 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await postUserLogin(email,password)
+            const token = res.data.token;
+            localStorage.setItem("token", token)
+            const decodedToken = jwtDecode(token)
             toast.success("Vous êtes connecté avec succès !")
             navigate("/dashboard")
         }catch (err){

@@ -26,8 +26,7 @@ axiosInstance.interceptors.response.use(
                     break
                 case 401:
                     localStorage.removeItem("token")
-                    localStorage.removeItem("role")
-                    window.location.href("/login")
+
                     break
                 case 403:
                     console.error("403 Forbidden")
