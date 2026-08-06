@@ -61,7 +61,7 @@ const Topbar = () => {
                             variant="subtitle2"
                             sx={{ fontWeight: 600, color: '#1F2937', lineHeight: 1 }}
                         >
-                            {user?.nom}
+                            {user?.nom} {user?.prenom}
                         </Typography>
                         <Typography
                             variant="caption"
