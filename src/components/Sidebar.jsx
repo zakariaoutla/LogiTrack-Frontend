@@ -56,7 +56,6 @@ const Sidebar = () => {
                 <img src={logo} alt="LogiTrack" style={{ height: 70 }} />
             </Box>
 
-            {/* Menu Items */}
             <List sx={{ px: 1, mt: 1 }}>
                 {menuItems.map((item) => (
                     <ListItemButton

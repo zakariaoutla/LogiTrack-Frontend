@@ -1,14 +1,8 @@
 import axiosInstance from "./axiosInstance.js";
 
 
-export const getAllClients = (page, size, sort)=>{
-    return axiosInstance.get("/clients",{
-        params:{
-            page: page,
-            size: size,
-            sort:sort
-        }
-    })
+export const getAllClients = (page, size, orderBy, order)=>{
+    return axiosInstance.get(`/clients?page=${page}&size=${size}&sort=${orderBy},${order.toLowerCase()}`)
 }
 
 export const getTotalClient = ()=>{
