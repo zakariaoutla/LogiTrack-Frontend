@@ -1,6 +1,5 @@
 
 import './App.css'
-import Navbar from "./components/Navbar.jsx";
 import Login from "./pages/Login.jsx";
 import {Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.jsx";
@@ -12,8 +11,8 @@ import Dashboard from "./pages/Dashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import GuestRouter from "./components/GuestRouter.jsx";
 import Clients from "./pages/Clients.jsx";
-import ClientForm from "./pages/ClientForm.jsx";
-import ClientFormPage from "./pages/ClientForm.jsx";
+import ClientFormSave from "./pages/ClientFormSave.jsx";
+import {ClientFormUpdate} from "./pages/ClientFormUpdate.jsx";
 
 function App() {
 
@@ -32,7 +31,8 @@ function App() {
                 <Route path="/dashboard" element={<PrivateLayout/>}>
                     <Route index element={<Dashboard/>}/>
                     <Route path="clients" element={<Clients/>}/>
-                    <Route path="/dashboard/clients/ajoute-clients" element={<ClientFormPage/>}/>
+                    <Route path="/dashboard/clients/ajoute-clients" element={<ClientFormSave/>}/>
+                    <Route path="/dashboard/clients/update-client/:id" element={<ClientFormUpdate/>}/>
                 </Route>
             </Route>
 
