@@ -20,3 +20,7 @@ export const putClient =(id,data)=>{
 export const getTotalClient = ()=>{
     return  axiosInstance.get("/clients/total-clients")
 }
+
+export const deleteClient=(id)=>{
+    return axiosInstance.delete(`/clients/${id}`)
+}

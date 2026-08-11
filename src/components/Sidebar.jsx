@@ -20,9 +20,8 @@ const drawerWidth = 240;
 const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Clients', icon: <PeopleIcon />, path: 'clients' },
-    { text: 'Products', icon: <Inventory2Icon />, path: '/products' },
-    { text: 'Orders', icon: <LocalShippingIcon />, path: '/orders' },
-    { text: 'Users', icon: <GroupIcon />, path: '/users' },
+    { text: 'Produits', icon: <Inventory2Icon />, path: 'produits' },
+    { text: 'Commandes', icon: <LocalShippingIcon />, path: 'orders' }
 ];
 
 const Sidebar = () => {

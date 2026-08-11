@@ -13,6 +13,14 @@ import GuestRouter from "./components/GuestRouter.jsx";
 import Clients from "./pages/Clients.jsx";
 import ClientFormSave from "./pages/ClientFormSave.jsx";
 import {ClientFormUpdate} from "./pages/ClientFormUpdate.jsx";
+import ClientDetails from "./pages/ClientDetails.jsx";
+import Produits from "./pages/Produits.jsx";
+import ProduitFormSave from "./pages/ProduitFormSave.jsx";
+import {ProduitFormUpdate} from "./pages/ProduitFormUpdate.jsx";
+import ProduitDetails from "./pages/ProduitDetails.jsx";
+import Commandes from "./pages/Commandes.jsx";
+import NouvelleCommande from "./pages/NouvelleCommande.jsx";
+import CommandeDetails from "./pages/CommandeDetails.jsx";
 
 function App() {
 
@@ -33,6 +41,16 @@ function App() {
                     <Route path="clients" element={<Clients/>}/>
                     <Route path="/dashboard/clients/ajoute-clients" element={<ClientFormSave/>}/>
                     <Route path="/dashboard/clients/update-client/:id" element={<ClientFormUpdate/>}/>
+                    <Route path="/dashboard/clients/client-detail/:id" element={<ClientDetails/>}/>
+                    <Route path="produits" element={<Produits/>}/>
+                    <Route path="/dashboard/produits/ajoute-produit" element={<ProduitFormSave/>}/>
+                    <Route path="/dashboard/produits/update-produit/:id" element={<ProduitFormUpdate/>}/>
+                    <Route path="/dashboard/produits/produit-detail/:id" element={<ProduitDetails/>}/>
+
+                    <Route path="orders" element={<Commandes/>}/>
+                    <Route path="/dashboard/commandes/nouvelle" element={<NouvelleCommande/>}/>
+                    <Route path="/dashboard/commandes/detail/:id" element={<CommandeDetails/>}/>
+
                 </Route>
             </Route>
 

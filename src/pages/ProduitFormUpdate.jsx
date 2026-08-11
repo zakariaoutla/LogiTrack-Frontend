@@ -2,17 +2,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {getClient, putClient} from "../api/clientService.js";
 import {useParams} from "react-router-dom";
-import ClientForm from "../components/ClientForm.jsx";
+import {getProduit, putProduit} from "../api/produitService.js";
+import ProductForm from "../components/ProductForm.jsx";
 
-export function ClientFormUpdate() {
+export function ProduitFormUpdate() {
     const [formData, setFormData] = useState({})
     const {id} = useParams()
 
-    const fetchClient = async () => {
+    const fetchProduit = async () => {
         try {
-            const res = await getClient(id)
+            const res = await getProduit(id)
             setFormData(res.data)
         } catch (err) {
             toast.error("invalid client");
@@ -21,7 +21,7 @@ export function ClientFormUpdate() {
 
     useEffect(() => {
         if (id) {
-            fetchClient()
+            fetchProduit()
         }
     }, [id])
 
@@ -33,10 +33,10 @@ export function ClientFormUpdate() {
     }
 
 
-    const updateClient = async (e) => {
+    const updateProduit = async (e) => {
         e.preventDefault()
         try {
-            const res = await putClient(id, formData)
+            const res = await putProduit(id, formData)
             setFormData(res.data)
             toast.success("update success")
         } catch (err) {
@@ -47,12 +47,12 @@ export function ClientFormUpdate() {
         <>
             <Box sx={{display: 'flex', justifyContent: 'space-between', paddingTop: 3}}>
                 <Typography variant="h4" sx={{fontWeight: 'bold'}}>
-                    Update un Client
+                    Update un Produit
                 </Typography>
             </Box>
             <Box sx={{paddingTop: 2}}/>
 
-            <ClientForm handleSubmit={updateClient} handleChange={handleChange} formData={formData}/>
+            <ProductForm handleSubmit={updateProduit} handleChange={handleChange} formData={formData}/>
         </>
     )
 }

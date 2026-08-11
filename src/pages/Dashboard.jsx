@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import DashboardCard from "../components/DashboardCard.jsx";
 import {useEffect, useState} from "react";
-import {getTotalClient} from "../api/cliantService.js";
+import {getTotalClient} from "../api/clientService.js";
 import {getTotalProduit} from "../api/produitService.js";
 import {getTotalOrder} from "../api/commandeService.js";
 import GroupIcon from '@mui/icons-material/Group';
@@ -52,7 +52,7 @@ export default function Dashboard(){
     const elementCard = [
         {number:totalClient, text: "Total Clients", desc:"Clients", icon:<GroupIcon sx={{ color: '#111827' }} /> },
         {number:totalProducts, text: "Total Products", desc: "Products", icon: <Inventory2Icon sx={{color:'#111827'}} />},
-        {number: totalOrders, text: "Total Orders", desc: "Orders", icon:<ListAltIcon sx={{color:'#111827'}}/> }
+        {number: totalOrders, text: "Total Commandes", desc: "Commandes", icon:<ListAltIcon sx={{color:'#111827'}}/> }
     ]
 
 
