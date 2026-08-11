@@ -1,6 +1,6 @@
 # 1. Nom du projet
 
-**Nom du projet :** Gestion Commerciale — Frontend React (Clients, Produits, Commandes)
+**Nom du projet :** LogiTrack  — Frontend React (Clients, Produits, Commandes)
 
 ---
 
