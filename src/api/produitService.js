@@ -24,3 +24,7 @@ export const deleteProduit=(id)=>{
 export const getTotalProduit = ()=>{
     return axiosInstance.get("/produit/total-produit")
 }
+
+export const getLowStockAlert =()=>{
+    return axiosInstance.get("/produit/stock-bas")
+}

@@ -9,9 +9,9 @@ export const getAllOrders = (id, page, size, orderBy, order)=>{
 }
 
 export const ajouteUnProduit =  (orderId,data) => {
-    return  axiosInstance.post(`/${orderId}/products`, data);
+    return  axiosInstance.post(`/orders/${orderId}/products`, data);
 };
 
 export const deleteLigne =  (id) => {
-    return  axiosInstance.delete(`/orders/${id}`);
+    return  axiosInstance.delete(`/orders/products/${id}`);
 };

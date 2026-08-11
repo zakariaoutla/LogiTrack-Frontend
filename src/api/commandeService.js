@@ -21,8 +21,12 @@ export const creeCommande =  (data) => {
 };
 
 export const updateStatut =  (id, newStatut) => {
-    return  axiosInstance.put(`/commande/${id}/statut`, null, {
+    return  axiosInstance.put(`/commande/${id}/status`, null, {
         params: { newStatut }
     });
 };
+
+export const countByStatus =()=>{
+    return axiosInstance.get("/commande/count-status")
+}
 

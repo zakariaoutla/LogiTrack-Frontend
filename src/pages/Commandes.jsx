@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { getAllCommandes } from "../api/commandeService.js";
+import {getAllCommandes, updateStatut} from "../api/commandeService.js";
 import CommandeRow from "../components/CommandeRow.jsx";
 
 export default function Commandes() {
@@ -42,6 +42,22 @@ export default function Commandes() {
         setOrderBy(property)
         setPage(0)
     }
+
+    const handleUpdateStatus = async (id, newStatut) => {
+        try {
+            await updateStatut(id, newStatut,null);
+
+            setCommandes(prevCommandes =>
+                prevCommandes.map(cmd =>
+                    cmd.id === id ? { ...cmd, commandeStatut: newStatut } : cmd
+                )
+            );
+            toast.success("Statut modifié avec succès")
+
+        } catch (error) {
+            toast.error("Erreur lors de la modification :", error)
+        }
+    };
 
     useEffect(() => {
         fetchCommandes();
@@ -111,6 +127,7 @@ export default function Commandes() {
                                 <CommandeRow
                                     key={commande.id}
                                     commande={commande}
+                                    onUpdateStatus={handleUpdateStatus}
                                 />
                             ))}
 

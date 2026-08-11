@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 import { getCommandeById } from "../api/commandeService.js";
 import { getAllProduit } from "../api/produitService.js";
-import {ajouteUnProduit, getAllOrders} from "../api/ligneCommande.js";
+import {ajouteUnProduit, deleteLigne, getAllOrders} from "../api/ligneCommande.js";
 
 export default function CommandeDetails() {
     const { id } = useParams();
@@ -62,6 +62,21 @@ export default function CommandeDetails() {
         }
     }
 
+    const handleDeleteLigne = async (ligneId) => {
+        if (!window.confirm("Voulez-vous vraiment supprimer ce produit de la commande ?")) {
+            return;
+        }
+        try {
+            await deleteLigne(ligneId);
+            toast.success("Produit supprimé de la commande !");
+            fetchAllOrder();
+            fetchData();
+        } catch (err) {
+            console.error(err);
+            toast.error(err.response?.data?.message || "Erreur lors de la suppression (Vérifiez vos droits d'accès).");
+        }
+    };
+
     useEffect(() => {
         fetchData();
         fetchAllProduit()
@@ -79,6 +94,7 @@ export default function CommandeDetails() {
         setAdding(true);
         try {
             const request = {
+                commandeId: id,
                 produitId: selectedProduitId,
                 quantite: parseInt(quantite, 10)
             };
@@ -134,7 +150,7 @@ export default function CommandeDetails() {
                 </Box>
             </Paper>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
                 <Grid item xs={12} md={4}>
                     <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}>
                         <Typography variant="h6" sx={{ mb: 3, fontWeight: 'bold' }}>Ajouter un Produit</Typography>
