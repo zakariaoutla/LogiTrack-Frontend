@@ -68,13 +68,13 @@ Pour utiliser ce projet, vous devez disposer de :
 ## 6.2 Cloner le dépôt
 
 ```bash
-git clone LIEN_DU_DEPOT
+git clone [LIEN_DU_DEPOT](https://github.com/zakariaoutla/LogiTrack-Frontend)
 ```
 
 Commande de votre projet :
 
 ```bash
-git clone <URL_DU_DEPOT_A_COMPLETER>
+git clone [<URL_DU_DEPOT_A_COMPLETER>](https://github.com/zakariaoutla/LogiTrack-Frontend)
 ```
 
 ## 6.3 Ouvrir le dossier
